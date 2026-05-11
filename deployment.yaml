@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: flask-container
-        image: flask-app:latest # We will build this in the pipeline
+        image: flask-app:latest #  build this in the pipeline
         ports:
         - containerPort: 5000
 ---
@@ -23,7 +23,7 @@ kind: Service
 metadata:
   name: flask-service
 spec:
-  type: NodePort # This makes it accessible on your laptop's IP
+  type: NodePort # This makes it accessible on  laptop's IP
   selector:
     app: flask
   ports:
