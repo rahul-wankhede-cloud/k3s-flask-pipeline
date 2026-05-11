@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-app
+spec:
+  replicas: 2 # Runs two copies for reliability
+  selector:
+    matchLabels:
+      app: flask
+  template:
+    metadata:
+      labels:
+        app: flask
+    spec:
+      containers:
+      - name: flask-container
+        image: flask-app:latest # We will build this in the pipeline
+        ports:
+        - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-service
+spec:
+  type: NodePort # This makes it accessible on your laptop's IP
+  selector:
+    app: flask
+  ports:
+    - port: 80
+      targetPort: 5000
+      nodePort: 30001 # You can visit this at http://localhost:30001
