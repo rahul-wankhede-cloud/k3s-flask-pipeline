@@ -14,7 +14,10 @@ spec:
     spec:
       containers:
       - name: flask-container
-        image: flask-app:latest #  build this in the pipeline
+        image: ghcr.io/rahul-wankhede-cloud/flask-app:latest #  build this in the pipeline
+        imagePullSecrets:
+          - name: ghcr-login
+        imagePullPolicy: Always
         ports:
         - containerPort: 5000
 ---
